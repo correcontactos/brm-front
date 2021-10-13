@@ -1,0 +1,58 @@
+
+<div>
+  <form [formGroup]="angForm" (ngSubmit)="postdata(angForm)" autocomplete="off" >
+  <div class="form-group">
+  <label for="user">Usuario</label>
+  <input type="user" name="user" formControlName="user" autocomplete="off" class="form-control input-sm" placeholder="Usuario" [(ngModel)]="selectedUser">
+  </div>
+  <div class="form-group">
+  <label for="pass">Clave</label>
+  <input type="password" name="pass" formControlName="pass" autocomplete="off" class="form-control input-sm" placeholder="Clave" [(ngModel)]="selectedPass">
+  </div>
+  <div class="form-group">
+  <label for="privilege">Privilegio</label>
+  <select type="privilege" name="privilege" formControlName="privilege" class="form-control input-sm" [(ngModel)]="selectedOption">
+    <option [value]="o.id" *ngFor="let o of options">
+      {{ o.name }}
+    </option>
+  </select>
+  </div>
+  <button type="submit" class="btn btn-success" >Crear</button>
+  </form>
+</div>
+<div class="container">
+  <div class="row" style='background-color: #6c757d;'>
+    <div class="col-sm text-center">
+      Id
+    </div>
+    <div class="col-sm text-justify">
+      Usuario
+    </div>
+    <div class="col-sm text-justify">
+      Privilegio
+    </div>
+    <div class="col-sm text-center">
+      Editar
+    </div>
+    <div class="col-sm text-center">
+      Eliminar
+    </div>
+  </div>
+  <div class="row" *ngFor="let res of results; let i = index" [ngStyle]="{'background-color' : i %2 == 0 ? '#198754':'#ffffff'}">
+    <div class="col-sm text-center">
+      {{ res.id }}
+    </div>
+    <div class="col-sm text-justify">
+      {{ res.user }}
+    </div>
+    <div class="col-sm text-justify">
+      {{ res.privilege }}
+    </div>
+    <div class="col-sm text-center">
+      <button type="button" class="btn btn-block" [routerLink]="['/editUser', res.id]" routerLinkActive="active">Editar</button>
+    </div>
+    <div class="col-sm text-center">
+      <button type="button" class="btn btn-block" (click)="delete(res.id)">Eliminar</button>
+    </div>
+  </div>
+</div>
